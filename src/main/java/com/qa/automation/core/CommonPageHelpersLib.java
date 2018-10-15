@@ -9,7 +9,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
@@ -19,16 +18,15 @@ public class CommonPageHelpersLib {
 	public static WebElement we;
 	public static FirefoxOptions ffoptions;
 
-	@SuppressWarnings("deprecation")
 	public static void init() {
 
 		if (Config.browser == "Firefox") {
 			FirefoxProfile profile = new FirefoxProfile();
 			profile.setPreference("permissions.default.desktop-notification", 1);
-			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-			capabilities.setCapability(FirefoxDriver.PROFILE, profile);
+			FirefoxOptions options = new FirefoxOptions();
+			options.setCapability(FirefoxDriver.PROFILE, profile);
 			System.setProperty("webdriver.gecko.driver", Config.firefoxdriverpath);
-			driver = new FirefoxDriver(capabilities);
+			driver = new FirefoxDriver(options);
 		} else if (Config.browser == "Chrome") {
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--disable-notifications");
@@ -108,7 +106,6 @@ public class CommonPageHelpersLib {
 		} else if (field[0].contentEquals("xpath")) {
 			we = driver.findElement(By.xpath(field[1]));
 		}
-
 		Actions action = new Actions(driver);
 		action.moveToElement(we).perform();
 	}

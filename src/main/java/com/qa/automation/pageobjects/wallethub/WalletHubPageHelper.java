@@ -61,7 +61,6 @@ public class WalletHubPageHelper extends CommonPageHelpersLib {
 			reviewComments += WalletHubPageConstants.reviewComments;
 			num++;
 		}
-		LogHelper.logDbgMsg(reviewComments);
 		enterText(WalletHubPageObjects.reviewCommentsField,reviewComments);
 	}
 	
