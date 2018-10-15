@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriver.Window;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -32,8 +33,10 @@ public class CommonPageHelpersLib {
 			System.setProperty("webdriver.gecko.driver", Config.firefoxdriverpath);
 			driver = new FirefoxDriver(capabilities);
 		} else if (Config.browser == "Chrome") {
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--disable-notifications");
 			System.setProperty("webdriver.chrome.driver", Config.chromedriverpath);
-			driver = new ChromeDriver();
+			driver = new ChromeDriver(options);
 		}
 		driver.manage().timeouts().implicitlyWait(Config.timeout, TimeUnit.SECONDS);
 		driver.manage().deleteAllCookies();
